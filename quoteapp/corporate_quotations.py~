@@ -1,0 +1,29 @@
+
+from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
+
+from django.shortcuts import render_to_response
+from django.views.decorators.csrf import csrf_exempt
+
+from django.contrib import auth
+from quoteapp.models import *
+from django.http import HttpResponse
+import pdb
+import json
+
+def quotation_list_page(request):
+    print 'Quotation List Page'
+    return render(request,'cam-user/quote-request/cam-quotation-list.html')
+
+def get_quotation_list(request):
+    data = {}
+    try:
+        quote_requests = QuoteRequest.objects.filter(customer_id=Customer.objects.get(id=request.session['user_id']))
+        quotations = QuotationResponse.objects.filter(request_id__in=quote_requests)
+        data = { 'data' :  [ q.get_quotation_info() for q in quotations ]}
+    except Exception as err:
+        print 'err', err
+        data = {'data' : 'none'}
+    return HttpResponse(json.dumps(data), content_type='application/json')
+    

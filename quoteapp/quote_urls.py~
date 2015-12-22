@@ -1,0 +1,14 @@
+from django.conf.urls import patterns, include, url
+from adminsite.views import *
+from adminsite.apartments import *
+from adminsite import cam
+from quoteapp.views import *
+
+
+quote_url_patterns = [
+
+    # url(r'^$', 'adminsite.cam.cam_api.cam_dashboard', name='cam_dashbaord'),
+    url(r'^request-list/', 'quoteapp.views.service_request.request_list_page', name='get_request_list')
+
+ 
+]
