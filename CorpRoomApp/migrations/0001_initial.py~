@@ -1,0 +1,254 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+import datetime
+from django.conf import settings
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('auth', '0001_initial'),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+    ]
+
+    operations = [
+        migrations.CreateModel(
+            name='Apartment',
+            fields=[
+                ('apt_id', models.AutoField(serialize=False, primary_key=True)),
+                ('apt_name', models.CharField(max_length=50, null=True, verbose_name=b'Apartment Name')),
+                ('apt_address', models.CharField(max_length=150, null=True, verbose_name=b'Address Line')),
+                ('apt_city', models.CharField(max_length=20, null=True, verbose_name=b'City')),
+                ('apt_state', models.CharField(max_length=20, null=True, verbose_name=b'State')),
+                ('apt_country', models.CharField(max_length=20, null=True, verbose_name=b'Country')),
+                ('is_apt_AC_NONAC', models.IntegerField(default=0, max_length=3, verbose_name=b'AC', choices=[(0, b'NO'), (1, b'YES')])),
+                ('is_apt_cook', models.IntegerField(default=0, max_length=3, verbose_name=b'Cook', choices=[(0, b'NO'), (1, b'YES')])),
+                ('is_apt_internet', models.IntegerField(default=0, max_length=3, verbose_name=b'Internet/Wifi', choices=[(0, b'NO'), (1, b'YES')])),
+                ('is_apt_hotcoldwater', models.IntegerField(default=0, max_length=3, verbose_name=b'Hot/Cold Water', choices=[(0, b'NO'), (1, b'YES')])),
+                ('is_apt_foodbeverage', models.IntegerField(default=0, max_length=3, verbose_name=b'Food Beverage', choices=[(0, b'NO'), (1, b'YES')])),
+                ('is_apt_roomfresheners', models.IntegerField(default=0, max_length=3, verbose_name=b'Room Freshners', choices=[(0, b'NO'), (1, b'YES')])),
+                ('is_apt_newspaper', models.IntegerField(default=0, max_length=3, verbose_name=b'News Paper', choices=[(0, b'NO'), (1, b'YES')])),
+                ('is_apt_security', models.IntegerField(default=0, max_length=3, verbose_name=b'Security', choices=[(0, b'NO'), (1, b'YES')])),
+                ('is_apt_laundry', models.IntegerField(default=0, max_length=3, verbose_name=b'Laundary Services', choices=[(0, b'NO'), (1, b'YES')])),
+                ('is_apt_breakfast', models.IntegerField(default=0, max_length=3, verbose_name=b'Breakfast', choices=[(0, b'NO'), (1, b'YES')])),
+                ('is_apt_lunch', models.IntegerField(default=0, max_length=3, verbose_name=b'Lunch', choices=[(0, b'NO'), (1, b'YES')])),
+                ('is_apt_dinner', models.IntegerField(default=0, max_length=3, verbose_name=b'Dinner', choices=[(0, b'NO'), (1, b'YES')])),
+                ('is_apt_housekeeping', models.IntegerField(default=0, max_length=3, verbose_name=b'House Keeping', choices=[(0, b'NO'), (1, b'YES')])),
+                ('is_apt_fireexit', models.IntegerField(default=0, max_length=3, verbose_name=b'Fire Exit ', choices=[(0, b'NO'), (1, b'YES')])),
+                ('is_apt_tv', models.IntegerField(default=0, max_length=3, verbose_name=b'TV', choices=[(0, b'NO'), (1, b'YES')])),
+                ('apt_status', models.IntegerField(default=0, max_length=3, verbose_name=b'Status', choices=[(0, b'AVAILABLE'), (1, b'BOOKED'), (2, b'NOT AVAILABLE')])),
+                ('apt_creation_date', models.DateTimeField(default=datetime.datetime(2015, 5, 19, 10, 6, 3, 112594))),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ApartmentOwner',
+            fields=[
+                ('apt_owner_id', models.AutoField(serialize=False, primary_key=True)),
+                ('apt_owner_name', models.CharField(max_length=50, null=True, verbose_name=b'Owner Name')),
+                ('apt_owner_email', models.CharField(max_length=30, null=True, verbose_name=b'Email ID')),
+                ('apt_owner_contactno', models.CharField(max_length=15, null=True, verbose_name=b'Contact Number')),
+                ('apt_owner_address', models.CharField(max_length=150, null=True, verbose_name=b'Address Line')),
+                ('apt_owner_city', models.CharField(max_length=20, null=True, verbose_name=b'City')),
+                ('apt_owner_state', models.CharField(max_length=20, null=True, verbose_name=b'State')),
+                ('apt_owner_country', models.CharField(max_length=20, null=True, verbose_name=b'Country')),
+                ('apt_owner_gender', models.CharField(max_length=20, null=True, verbose_name=b'Gender', choices=[(b'M', b'MALE'), (b'F', b'FEMALE')])),
+                ('apt_owner_age', models.CharField(max_length=20, null=True, verbose_name=b'Age')),
+                ('apt_owner_isemailalert_on', models.IntegerField(default=0, max_length=3, verbose_name=b'Email Alert', choices=[(0, b'NO'), (1, b'YES')])),
+                ('apt_owner_issmsalert_on', models.IntegerField(default=0, max_length=3, verbose_name=b'SMS Alert', choices=[(0, b'NO'), (1, b'YES')])),
+                ('apt_owner_status', models.IntegerField(default=1, max_length=2, verbose_name=b'Status', choices=[(1, b'ACTIVE'), (0, b'IN-ACTIVE')])),
+                ('apt_owner_creation_date', models.DateTimeField(default=datetime.datetime(2015, 5, 19, 10, 6, 3, 111274))),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ApartmentRoom',
+            fields=[
+                ('apt_room_id', models.AutoField(serialize=False, primary_key=True)),
+                ('apt_room_number', models.IntegerField(max_length=20, null=True, verbose_name=b'Room Number ')),
+                ('apt_room_rate', models.FloatField(null=True, verbose_name=b'Room Rate')),
+                ('apt_room_images', models.ImageField(upload_to=b'media/rooms', max_length=255, verbose_name=b'Room Image')),
+                ('apt_room_is_singlebed', models.IntegerField(default=0, max_length=3, verbose_name=b'Single Bed', choices=[(0, b'NO'), (1, b'YES')])),
+                ('apt_room_is_doublebed', models.IntegerField(default=0, max_length=3, verbose_name=b'Double Bed', choices=[(0, b'NO'), (1, b'YES')])),
+                ('apt_room_status', models.IntegerField(default=0, max_length=3, verbose_name=b'Status', choices=[(0, b'AVAILABLE'), (1, b'BOOKED'), (2, b'NOT AVAILABLE')])),
+                ('apt_room_creation_date', models.DateTimeField(default=datetime.datetime(2015, 5, 19, 10, 6, 3, 113331))),
+                ('apt_id', models.ForeignKey(related_name='apartment', verbose_name=b'Apartment Name', to='CorpRoomApp.Apartment', null=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='CAM',
+            fields=[
+                ('cam_id', models.AutoField(serialize=False, primary_key=True)),
+                ('cam_first_name', models.CharField(max_length=50, null=True, verbose_name=b'First Name ')),
+                ('cam_last_name', models.CharField(max_length=50, null=True, verbose_name=b'Last Name ')),
+                ('cam_email', models.CharField(max_length=50, null=True, verbose_name=b'Email Id ')),
+                ('cam_contactno', models.CharField(max_length=50, null=True, verbose_name=b'Contact Number ')),
+                ('cam_city', models.CharField(max_length=50, null=True, verbose_name=b'City ')),
+                ('cam_state', models.CharField(max_length=50, null=True, verbose_name=b'State ')),
+                ('cam_country', models.CharField(max_length=50, null=True, verbose_name=b'Country ')),
+                ('cam_gender', models.CharField(max_length=20, null=True, verbose_name=b'Gender', choices=[(b'M', b'MALE'), (b'F', b'FEMALE')])),
+                ('cam_age', models.PositiveIntegerField(null=True, verbose_name=b'Age')),
+                ('cam_image', models.ImageField(upload_to=b'media/cam', max_length=255, verbose_name=b'Upload Image')),
+                ('cam_isemailalert_on', models.IntegerField(default=0, max_length=3, verbose_name=b'Email Alert', choices=[(0, b'NO'), (1, b'YES')])),
+                ('cam_issmsalert_on', models.IntegerField(default=0, max_length=3, verbose_name=b'SMS Alert', choices=[(0, b'NO'), (1, b'YES')])),
+                ('cam_status', models.IntegerField(default=1, max_length=2, verbose_name=b'Status', choices=[(1, b'ACTIVE'), (0, b'IN-ACTIVE')])),
+                ('cam_creation_date', models.DateTimeField(default=datetime.datetime(2015, 5, 19, 10, 6, 3, 114665))),
+            ],
+            options={
+                'abstract': False,
+                'verbose_name': 'CAM user',
+                'verbose_name_plural': 'CAM users',
+            },
+            bases=('auth.user',),
+        ),
+        migrations.CreateModel(
+            name='CAMBooking',
+            fields=[
+                ('cam_booking_id', models.AutoField(serialize=False, primary_key=True)),
+                ('cam_booking_datetime', models.DateTimeField(default=datetime.datetime(2015, 5, 19, 10, 6, 3, 116431))),
+                ('cam_booking_estimated_checkin_datetime', models.DateTimeField(null=True, verbose_name=b'Estimated Check In Date ')),
+                ('cam_booking_estimated_checkout_datetime', models.DateTimeField(null=True, verbose_name=b'Estimated Check Out Date ')),
+                ('cam_booking_actual_checkin_datetime', models.DateTimeField(null=True, verbose_name=b'Actual Check In Date ')),
+                ('cam_booking_actual_checkout_datetime', models.DateTimeField(null=True, verbose_name=b'Actual Check Out Date ')),
+                ('cam_booking_estimated_no_of_day_stay', models.PositiveIntegerField(null=True, verbose_name=b'Estimated Days')),
+                ('cam_booking_actual_no_of_day_stay', models.PositiveIntegerField(null=True, verbose_name=b'Actual Days Stayed')),
+                ('cam_booking_cancellation_on_datetime', models.DateTimeField(null=True, verbose_name=b'Booking Cancellation Date')),
+                ('cam_booking_status', models.IntegerField(default=0, max_length=3, verbose_name=b'Status', choices=[(0, b'AVAILABLE'), (1, b'BOOKED'), (2, b'NOT AVAILABLE')])),
+                ('cam_booking_creation_date', models.DateTimeField(default=datetime.datetime(2015, 5, 19, 10, 6, 3, 116551))),
+                ('apt_id', models.ForeignKey(related_name='cam', verbose_name=b'Apartment Name', to='CorpRoomApp.Apartment', null=True)),
+                ('aptroom_id', models.ForeignKey(related_name='apartmentrooms', verbose_name=b'Room Number', to='CorpRoomApp.ApartmentRoom', null=True)),
+                ('cam_id', models.ForeignKey(related_name='cam', verbose_name=b'CAM Name', to='CorpRoomApp.CAM', null=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='CAMCompany',
+            fields=[
+                ('cam_company_id', models.AutoField(serialize=False, primary_key=True)),
+                ('cam_company_name', models.CharField(max_length=50, null=True, verbose_name=b'Company Name')),
+                ('cam_company_email', models.CharField(max_length=50, null=True, verbose_name=b'Company Email')),
+                ('cam_company_contactno', models.CharField(max_length=50, null=True, verbose_name=b'Company Contact No.')),
+                ('cam_company_address', models.CharField(max_length=50, null=True, verbose_name=b'Company Address')),
+                ('cam_company_city', models.CharField(max_length=50, null=True, verbose_name=b'City')),
+                ('cam_company_state', models.CharField(max_length=50, null=True, verbose_name=b'State')),
+                ('cam_company_country', models.CharField(max_length=50, null=True, verbose_name=b'Country')),
+                ('cam_company_status', models.IntegerField(default=1, max_length=5, verbose_name=b'Company Status', choices=[(1, b'ACTIVE'), (0, b'IN-ACTIVE')])),
+                ('cam_company_creation_date', models.DateTimeField(default=datetime.datetime(2015, 5, 19, 10, 6, 3, 113954))),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='CRM',
+            fields=[
+                ('crm_id', models.AutoField(serialize=False, primary_key=True)),
+                ('crm_contactno', models.CharField(max_length=15, null=True, verbose_name=b'Phone Number')),
+                ('crm_city', models.CharField(max_length=30, null=True, verbose_name=b'City')),
+                ('crm_state', models.CharField(max_length=30, null=True, verbose_name=b'State')),
+                ('crm_country', models.CharField(max_length=30, null=True, verbose_name=b'Country')),
+                ('crm_gender', models.CharField(max_length=10, null=True, verbose_name=b'Gender', choices=[(b'M', b'MALE'), (b'F', b'FEMALE')])),
+                ('crm_age', models.PositiveIntegerField(null=True, verbose_name=b'Age')),
+                ('crm_isemailalert_on', models.IntegerField(default=0, max_length=3, verbose_name=b'Email Alerts?', choices=[(0, b'NO'), (1, b'YES')])),
+                ('crm_issmsalert_on', models.IntegerField(default=0, max_length=3, verbose_name=b'SMS Alerts?', choices=[(0, b'NO'), (1, b'YES')])),
+                ('crm_status', models.IntegerField(default=1, max_length=2, verbose_name=b'Status', choices=[(1, b'ACTIVE'), (0, b'IN-ACTIVE')])),
+                ('crm_creation_date', models.DateTimeField(default=datetime.datetime(2015, 5, 19, 10, 6, 3, 117494))),
+                ('user_ptr_id1', models.OneToOneField(parent_link=True, auto_created=True, to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
+                'abstract': False,
+                'verbose_name': 'CRM user',
+                'verbose_name_plural': 'CRM users',
+            },
+            bases=('auth.user',),
+        ),
+        migrations.CreateModel(
+            name='Guest',
+            fields=[
+                ('guest_id', models.AutoField(serialize=False, primary_key=True)),
+                ('guest_first_name', models.CharField(max_length=50, null=True, verbose_name=b'First Name ')),
+                ('guest_last_name', models.CharField(max_length=50, null=True, verbose_name=b'Last Name ')),
+                ('guest_email', models.CharField(max_length=50, null=True, verbose_name=b'Guest Email Id ')),
+                ('guest_contactno', models.CharField(max_length=15, null=True, verbose_name=b'Contact Number ')),
+                ('guest_status', models.IntegerField(max_length=10, null=True, verbose_name=b'Status', choices=[(1, b'ACTIVE'), (0, b'IN-ACTIVE')])),
+                ('guest_creation_date', models.DateTimeField(default=datetime.datetime(2015, 5, 19, 10, 6, 3, 115433))),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='GuestRating',
+            fields=[
+                ('guest_rating_id', models.AutoField(serialize=False, primary_key=True)),
+                ('guest_rating_number', models.PositiveIntegerField(null=True, verbose_name=b'Guest Rating(0 to 5)')),
+                ('is_favorite', models.IntegerField(default=0, max_length=3, verbose_name=b'Favorite?', choices=[(0, b'NO'), (1, b'YES')])),
+                ('guest_issues_details', models.CharField(max_length=1000, null=True, verbose_name=b'Guest Issues(If Any) ')),
+                ('guest_feedback', models.CharField(max_length=1000, null=True, verbose_name=b'Guest Feedback ')),
+                ('guest_rating_date', models.DateTimeField(default=datetime.datetime(2015, 5, 19, 10, 6, 3, 115892))),
+                ('guest_id', models.ForeignKey(related_name='guest', verbose_name=b'Guest Name', to='CorpRoomApp.Guest', null=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Invoice',
+            fields=[
+                ('invoice_id', models.AutoField(serialize=False, primary_key=True)),
+                ('invoice_datetime', models.DateTimeField(default=datetime.datetime(2015, 5, 19, 10, 6, 3, 118348))),
+                ('room_charges', models.FloatField(default=0.0, verbose_name=b'Room Charges')),
+                ('extra_charges', models.FloatField(default=0.0, verbose_name=b'Extra Charges')),
+                ('invoice_total_amount', models.FloatField(default=0.0, verbose_name=b'Invoice Total Amount')),
+                ('discount', models.FloatField(default=0.0, verbose_name=b'Discount Amount')),
+                ('invoice_gross_amount', models.FloatField(default=0.0, verbose_name=b'Invoice Gross Amount')),
+                ('invoice_status', models.CharField(default=b'U', max_length=3, verbose_name=b'Status', choices=[(b'P', b'PAID'), (b'U', b'UNPAID')])),
+                ('invoice_paid_date', models.DateTimeField(null=True, verbose_name=b'Paid Date')),
+                ('cam_booking_id', models.ForeignKey(related_name='cam_booking', verbose_name=b'Guests', to='CorpRoomApp.CAMBooking', null=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='cambooking',
+            name='guest_id',
+            field=models.ForeignKey(related_name='guest_name', verbose_name=b'Guests', to='CorpRoomApp.Guest', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='cambooking',
+            name='guest_rating',
+            field=models.ForeignKey(related_name='guest_ratings', verbose_name=b'Guest Rating', to='CorpRoomApp.GuestRating', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='cam',
+            name='cam_company_id',
+            field=models.ForeignKey(related_name='company', verbose_name=b'Company Name', to='CorpRoomApp.CAMCompany', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='cam',
+            name='user_ptr_id2',
+            field=models.OneToOneField(parent_link=True, auto_created=True, to=settings.AUTH_USER_MODEL),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='apartment',
+            name='apt_owner_id',
+            field=models.ForeignKey(related_name='owner', verbose_name=b'Owner Name', to='CorpRoomApp.ApartmentOwner', null=True),
+            preserve_default=True,
+        ),
+    ]
